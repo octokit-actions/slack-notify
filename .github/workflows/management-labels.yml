@@ -1,0 +1,29 @@
+name: github
+
+on:
+  push:
+    paths:
+      - .github/labels.yml
+      - .github/workflows/management-labels.yml
+jobs:
+  labeler:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run Labeler
+        if: github.event.pull_request.merged == true
+        uses: crazy-max/ghaction-github-labeler@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          yaml-file: .github/labels.yml
+          skip-delete: false
+          dry-run: true
+      - name: Run Labeler
+        if: github.event.pull_request.merged == false
+        uses: crazy-max/ghaction-github-labeler@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          yaml-file: .github/labels.yml
+          skip-delete: false
+          dry-run: false
