@@ -1,0 +1,20 @@
+name: slack notify actions test
+
+on: [push]
+
+jobs:
+  slack-notify-test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: action step
+        uses: ./
+        with:
+          incoming-webhook-url: ${{ secrets.WEBHOOK_URL }}
+          repo-token: ${{ github.token }}
+          message-template: ./.github/slack.handlebars.json
+          env-vars-for-template: |
+            foo
+        env:
+          foo: hoge
