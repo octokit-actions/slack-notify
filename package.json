@@ -9,7 +9,7 @@
     "test": "jest",
     "build": "tsc",
     "format-check": "prettier --check **/*.ts",
-    "package": "ncc build",
+    "package": "tsc && ncc build",
     "coverage": "jest --coverage",
     "lint": "eslint -c .eslintrc.js \"src/**/*.{ts,tsx}\"",
     "format": "prettier --write \"src/**/*.{ts,tsx}\""

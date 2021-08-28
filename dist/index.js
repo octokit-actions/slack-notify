@@ -30,7 +30,7 @@ const fetchContent = async (token, repoPath, repositoryOwner, repositoryName, re
     return Buffer.from(response.data.content, response.data.encoding).toString();
 };
 exports.fetchContent = fetchContent;
-
+//# sourceMappingURL=github.js.map
 
 /***/ }),
 
@@ -96,8 +96,12 @@ async function run() {
         core.setFailed(error.message);
     }
 }
-run().then().catch();
-
+run()
+    .then()
+    .catch(error => {
+    core.error(error);
+});
+//# sourceMappingURL=main.js.map
 
 /***/ }),
 
@@ -133,7 +137,7 @@ const createMessage = (messageTemplate, env) => {
     return JSON.parse(templateDelegate(env));
 };
 exports.createMessage = createMessage;
-
+//# sourceMappingURL=message.js.map
 
 /***/ }),
 
@@ -150,7 +154,7 @@ const postSlackMessage = async (webhookUrl, slackRequestBody) => {
     return await webhook.send(slackRequestBody);
 };
 exports.postSlackMessage = postSlackMessage;
-
+//# sourceMappingURL=slack.js.map
 
 /***/ }),
 
@@ -183,7 +187,7 @@ const filterByKeys = (value, keys) => {
     });
 };
 exports.filterByKeys = filterByKeys;
-
+//# sourceMappingURL=util.js.map
 
 /***/ }),
 
