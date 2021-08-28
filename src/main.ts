@@ -5,7 +5,6 @@ import {fetchContent} from './github'
 import {createMessage} from './message'
 import {IncomingWebhookSendArguments} from '@slack/webhook/dist/IncomingWebhook'
 import {filterByKeys, splitComma} from './util'
-import {error} from '@actions/core'
 
 async function run(): Promise<void> {
   try {
@@ -16,6 +15,7 @@ async function run(): Promise<void> {
     const messageTemplatePath:
       | string
       | undefined = core.getInput('message-template', {required: false})
+    core.info(messageTemplatePath)
     const message: string | undefined = core.getInput('message', {
       required: false
     })

@@ -72,6 +72,7 @@ async function run() {
         });
         const repoToken = core.getInput('repo-token', { required: false });
         const messageTemplatePath = core.getInput('message-template', { required: false });
+        core.info(messageTemplatePath);
         const message = core.getInput('message', {
             required: false
         });
