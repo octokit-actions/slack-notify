@@ -77,6 +77,7 @@ async function run() {
             required: false
         });
         const environmentValue = util_1.filterByKeys(process.env, util_1.splitComma(core.getInput('env-vars-for-template', { required: false })));
+        core.info(await github_2.fetchContent(repoToken, messageTemplatePath, github_1.context.repo.repo, github_1.context.repo.owner, github_1.context.ref));
         let slackRequestBody;
         if (messageTemplatePath) {
             if (!repoToken) {
@@ -91,7 +92,7 @@ async function run() {
             core.error('message or message-template required');
         }
         if (slackRequestBody) {
-            await slack_1.postSlackMessage(incomingWebhookUrl, slackRequestBody);
+            await slack_1.postSlackMessage(incomingWebhookUrl, slackRequestBody).catch(reason => core.error(reason));
         }
     }
     catch (error) {

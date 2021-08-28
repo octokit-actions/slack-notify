@@ -23,7 +23,13 @@ async function run(): Promise<void> {
       process.env,
       splitComma(core.getInput('env-vars-for-template', {required: false}))
     )
-
+    core.info(await fetchContent(
+      repoToken,
+      messageTemplatePath,
+      context.repo.repo,
+      context.repo.owner,
+      context.ref
+    ))
     let slackRequestBody: string | IncomingWebhookSendArguments | undefined
     if (messageTemplatePath) {
       if (!repoToken) {
@@ -45,7 +51,9 @@ async function run(): Promise<void> {
       core.error('message or message-template required')
     }
     if (slackRequestBody) {
-      await postSlackMessage(incomingWebhookUrl, slackRequestBody)
+      await postSlackMessage(incomingWebhookUrl, slackRequestBody).catch(
+        reason => core.error(reason)
+      )
     }
   } catch (error) {
     core.setFailed(error.message)
