@@ -37,13 +37,13 @@ async function run(): Promise<void> {
           ),
           environmentValue
         )
+        core.info(slackRequestBody as string)
       }
     } else if (message) {
       slackRequestBody = message
     } else {
       core.error('message or message-template required')
     }
-
     if (slackRequestBody) {
       await postSlackMessage(incomingWebhookUrl, slackRequestBody)
     }

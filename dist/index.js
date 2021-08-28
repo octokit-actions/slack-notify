@@ -81,6 +81,7 @@ async function run() {
         if (messageTemplatePath) {
             if (!repoToken) {
                 slackRequestBody = message_1.createMessage(await github_2.fetchContent(repoToken, messageTemplatePath, github_1.context.repo.repo, github_1.context.repo.owner, github_1.context.ref), environmentValue);
+                core.info(slackRequestBody);
             }
         }
         else if (message) {
