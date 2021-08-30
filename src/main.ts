@@ -29,8 +29,8 @@ async function run(): Promise<void> {
     core.info(await fetchContent(
       repoToken,
       messageTemplatePath,
-      context.repo.repo,
       context.repo.owner,
+      context.repo.repo,
       context.ref
     ))
     let slackRequestBody: string | IncomingWebhookSendArguments | undefined
@@ -40,8 +40,8 @@ async function run(): Promise<void> {
           await fetchContent(
             repoToken,
             messageTemplatePath,
-            context.repo.repo,
             context.repo.owner,
+            context.repo.repo,
             context.ref
           ),
           environmentValue
