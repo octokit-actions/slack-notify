@@ -1,0 +1,21 @@
+name: 'slack notify'
+description: 'Slack messages for GitHub Action. You can dynamically compose messages from template.'
+inputs:
+  incoming-webhook-url:
+    description: 'Please set webhook url.'
+    required: true
+  repo-token:
+    description: 'A token of the repository. It can be passed with `{{ secrets.GITHUB_TOKEN }}`.'
+    required: false
+  message:
+    description: 'Please set webhook request body. message or message-template required'
+    required: false
+  message-template:
+    description: 'Please pass the path of the handlebar template. message or message-template required'
+    required: false
+  env-vars-for-template:
+    description: 'A comma-separated list of the names of environment variables that the action passes from GitHub Actions to template.'
+    required: false
+runs:
+  main: 'dist/index.js'
+  using: 'node12'

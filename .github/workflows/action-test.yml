@@ -1,0 +1,31 @@
+name: slack notify actions test
+
+on: [push]
+
+jobs:
+  slack-notify-test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-actions-test
+      - name: Run Package
+        run: npm install && npm run package
+      - name: action step
+        uses: ./
+        with:
+          incoming-webhook-url: ${{ secrets.WEBHOOK_URL }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          message-template: .github/slack.handlebars.json
+          env-vars-for-template: |
+            foo
+        env:
+          foo: hoge
