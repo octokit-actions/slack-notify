@@ -25,7 +25,7 @@ async function run(): Promise<void> {
     )
     let slackRequestBody: string | IncomingWebhookSendArguments | undefined
     if (messageTemplatePath) {
-      if (!repoToken) {
+      if (repoToken) {
         slackRequestBody = createMessage(
           await fetchContent(
             repoToken,
