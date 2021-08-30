@@ -24,7 +24,7 @@ jobs:
         with:
           incoming-webhook-url: ${{ secrets.WEBHOOK_URL }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message-template: ./.github/slack.handlebars.json
+          message-template: .github/slack.handlebars.json
           env-vars-for-template: |
             foo
         env:

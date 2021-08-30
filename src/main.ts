@@ -23,16 +23,6 @@ async function run(): Promise<void> {
       process.env,
       splitComma(core.getInput('env-vars-for-template', {required: false}))
     )
-    core.info(context.repo.repo)
-    core.info(context.repo.owner)
-    core.info(context.ref)
-    core.info(await fetchContent(
-      repoToken,
-      messageTemplatePath,
-      context.repo.owner,
-      context.repo.repo,
-      context.ref
-    ))
     let slackRequestBody: string | IncomingWebhookSendArguments | undefined
     if (messageTemplatePath) {
       if (!repoToken) {
