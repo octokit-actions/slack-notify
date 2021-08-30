@@ -7,7 +7,7 @@ inputs:
   repo-token:
     description: 'A token of the repository. It can be passed with `{{ secrets.GITHUB_TOKEN }}`.'
     required: false
-    default: ${{ github.token }}
+    default: ${{ secrets.GITHUB_TOKEN }}
   message:
     description: 'Please set webhook request body. message or message-template required'
     required: false
